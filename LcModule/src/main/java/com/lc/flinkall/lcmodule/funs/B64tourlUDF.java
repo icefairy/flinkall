@@ -2,6 +2,7 @@ package com.lc.flinkall.lcmodule.funs;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
@@ -27,6 +28,7 @@ public class B64tourlUDF extends ScalarFunction {
         swhost = context.getJobParameter("swhost", "http://localhost:8888/");
         swtimeout = context.getJobParameter("swtimeout", "5000");
         swftype = context.getJobParameter("swftype", "jpg");
+//        System.out.println(StrUtil.format("swhost:{} swtimeout:{} swftype:{}", swhost, swtimeout, swftype));
     }
 
     public String eval(String b64) {
