@@ -11,7 +11,8 @@ import java.util.*;
 public class LCModule implements Module {
     private final String lcVersion;
     private String[] functions = new String[]{
-            "b64tourl"
+            "b64tourl",
+            "urltob64"
     };
 
     public LCModule(String lcVersion) {
