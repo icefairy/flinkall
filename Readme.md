@@ -3,10 +3,16 @@
 通过加载module的方式，支持直接在sql-client中对base64数据进行转换，支持如下操作：
 
 + b64tourl 通过将base64存到seaweedfs中转换成url
-+ urltob65 通过下载指定url的内容变换为base64字符串
++ urltob64 通过下载指定url的内容变换为base64字符串
 + 
 
 ## 使用案例
++ 支持的参数
+```java
+ * String swhost = "http://localhost:8888/";
+ * String swtimeout = "5000";
+ * String swftype = "jpg";
+```
 + 将flink-lc-1.13.6.jar复制放到flink的lib文件夹中并重启集群
 + 读取kafka数据将base64数据存到seaweedfs中变成url
 ```sql
