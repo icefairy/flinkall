@@ -42,7 +42,9 @@ public class B64tourlUDF extends ScalarFunction {
         //判断有没有图片头有的话去掉
         if (b64.startsWith("data")) {
             int nBegin = b64.indexOf("base64,");
-            b64 = StrUtil.subSuf(b64, nBegin + 7);
+            if (nBegin > -1) {
+                b64 = StrUtil.subSuf(b64, nBegin + 7);
+            }
         }
         if (b64 != null && b64.length() < 1) {
             //内容为空忽略
