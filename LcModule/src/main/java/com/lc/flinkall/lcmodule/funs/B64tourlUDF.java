@@ -12,22 +12,25 @@ import org.apache.flink.table.functions.ScalarFunction;
 
 /**
  * 提供三个参数
- * 在sql-client中传参方式为：SET pipeline.global-job-parameters=swhost:'http://192.168.240.14:7777/';
- * String swhost = "http://localhost:8888/";
- * String swtimeout = "5000";
- * String swftype = "jpg";
+ * 在sql-client中传参方式为：SET pipeline.global-job-parameters=swftype:jpg,urlsuffix:7d,swhost:'http://192.168.240.14:7777/';
+ * String swhost = "http://localhost:8888/"; //seaweedfs的filer地址
+ * String swtimeout = "5000"; //保存图片超时时间ms
+ * String swftype = "jpg"; //未指定文件名时候自动生成的文件名后缀
+ * String urlsuffix=""; //用于添加ttl等参数，例如ttl=10d保留10天
  */
 @Internal
 public class B64tourlUDF extends ScalarFunction {
     String swhost = "http://localhost:8888/";
     String swtimeout = "5000";
     String swftype = "jpg";
+    String urlsuffix = "";
 
     @Override
     public void open(FunctionContext context) throws Exception {
         swhost = context.getJobParameter("swhost", "http://localhost:8888/");
         swtimeout = context.getJobParameter("swtimeout", "5000");
         swftype = context.getJobParameter("swftype", "jpg");
+        urlsuffix = context.getJobParameter("urlsuffix", "");
 //        System.out.println(StrUtil.format("swhost:{} swtimeout:{} swftype:{}", swhost, swtimeout, swftype));
     }
 
@@ -36,7 +39,7 @@ public class B64tourlUDF extends ScalarFunction {
     }
 
     public String eval(String b64, String fn) {
-        HttpRequest req = HttpUtil.createPost(swhost + fn);
+        HttpRequest req = HttpUtil.createPost(swhost + fn + "?" + urlsuffix);
         try {
             req.timeout(Integer.parseInt(swtimeout));
             req.form("img", Base64.decode(b64), fn);
