@@ -40,7 +40,7 @@ public class B64tourlUDF extends ScalarFunction {
 
     public String eval(String b64, String fn) {
         //判断有没有图片头有的话去掉
-        if (b64 != null && b64.length() < 1) {
+        if (b64 ==null || StrUtil.isBlank(b64)) {
             //内容为空忽略
             return "";
         }
