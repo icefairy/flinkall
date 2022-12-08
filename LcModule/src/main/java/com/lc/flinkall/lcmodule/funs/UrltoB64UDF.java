@@ -1,6 +1,7 @@
 package com.lc.flinkall.lcmodule.funs;
 
 import cn.hutool.core.codec.Base64;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
@@ -18,6 +19,9 @@ public class UrltoB64UDF extends ScalarFunction {
     }
 
     public String eval(String url) {
+        if (url == null || StrUtil.isBlank(url)) {
+            return "";
+        }
         HttpRequest req = HttpUtil.createGet(url, true);
         req.timeout(Integer.parseInt(swtimeout));
         try {
