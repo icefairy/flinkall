@@ -1,16 +1,18 @@
 package com.lc.flinkall.lcmodule;
 
+import org.apache.flink.table.descriptors.ConnectorDescriptorValidator;
 import org.apache.flink.table.descriptors.DescriptorProperties;
-import org.apache.flink.table.descriptors.ModuleDescriptorValidator;
 
-public class LCModuleDescriptorValidator extends ModuleDescriptorValidator {
+import static org.apache.flink.table.module.CommonModuleOptions.MODULE_TYPE;
+
+public class LCModuleDescriptorValidator extends ConnectorDescriptorValidator {
     public static final String MODULE_TYPE_LC = "lc";
     public static final String MODULE_LC_VERSION = "lc-version";
 
     @Override
     public void validate(DescriptorProperties properties) {
         super.validate(properties);
-        properties.validateValue(MODULE_TYPE, MODULE_TYPE_LC, false);
+        properties.validateValue(String.valueOf(MODULE_TYPE), MODULE_TYPE_LC, false);
         properties.validateString(MODULE_LC_VERSION, true, 1);
     }
 }

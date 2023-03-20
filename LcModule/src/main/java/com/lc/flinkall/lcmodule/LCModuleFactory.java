@@ -11,7 +11,7 @@ import java.util.Map;
 
 import static com.lc.flinkall.lcmodule.LCModuleDescriptorValidator.MODULE_LC_VERSION;
 import static com.lc.flinkall.lcmodule.LCModuleDescriptorValidator.MODULE_TYPE_LC;
-import static org.apache.flink.table.descriptors.ModuleDescriptorValidator.MODULE_TYPE;
+import static org.apache.flink.table.module.CommonModuleOptions.MODULE_TYPE;
 
 public class LCModuleFactory implements ModuleFactory {
     @Override
@@ -28,7 +28,7 @@ public class LCModuleFactory implements ModuleFactory {
     @Override
     public Map<String, String> requiredContext() {
         Map<String, String> context = new HashMap<>();
-        context.put(MODULE_TYPE, MODULE_TYPE_LC);
+        context.put(String.valueOf(MODULE_TYPE), MODULE_TYPE_LC);
         return context;
     }
 
