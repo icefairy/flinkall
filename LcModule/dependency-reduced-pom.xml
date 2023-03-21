@@ -7,7 +7,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>flink-lc</artifactId>
-  <version>1.13.6</version>
+  <version>1.16.1</version>
   <build>
     <pluginManagement>
       <plugins>
